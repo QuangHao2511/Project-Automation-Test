@@ -1,0 +1,23 @@
+{
+  "TC01_EMPTY_PASSWORD": {
+    "title": "Bỏ trống mật khẩu khi đăng nhập",
+    "severity": "CRITICAL",
+    "username": "standard_user",
+    "password": "",
+    "expected_error": "Epic sadface: Password is required"
+  },
+  "TC02_LOCKED_USER": {
+    "title": "Đăng nhập tài khoản đã bị khóa trong hệ thống",
+    "severity": "BLOCKER",
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "expected_error": "Epic sadface: Sorry, this user has been locked out."
+  },
+  "TC03_WRONG_PASSWORD": {
+    "title": "Nhập sai mật khẩu của tài khoản",
+    "severity": "NORMAL",
+    "username": "standard_user",
+    "password": "invalid_password_123",
+    "expected_error": "Epic sadface: Username and password do not match any user in this service"
+  }
+}

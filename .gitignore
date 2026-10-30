@@ -1,0 +1,19 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Môi trường ảo
+venv/
+.env
+
+# Báo cáo Allure & Screenshots
+reports/allure-results/
+reports/screenshots/
+reports/state/
+reports/report.html
+
+# Playwright artifacts
+test-results/
+playwright-report/

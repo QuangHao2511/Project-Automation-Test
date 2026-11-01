@@ -1,4 +1,5 @@
 # tests/conftest.py
+import os
 import pytest
 import allure
 from datetime import datetime
@@ -9,13 +10,17 @@ from config.settings import AUTH_STATE_FILE
 SCREENSHOT_DIR = Path(__file__).resolve().parent.parent / "reports" / "screenshots"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Tự động nhận diện môi trường CI (GitHub Actions luôn có biến CI="true")
+IS_CI = os.getenv("CI") == "true"
+
 @pytest.fixture(scope="session")
 def browser_instance():
-    """Khởi tạo Browser với giao diện hiển thị (Headed Mode)."""
+    """Khởi tạo Browser: Tự động chạy ngầm trên CI và bật giao diện khi chạy local."""
     with sync_playwright() as p:
-        # headless=False: BẬT giao diện trình duyệt
-        # slow_mo=500: Làm chậm mỗi hành động 500ms để quan sát rõ thao tác
-        browser = p.chromium.launch(headless=False, slow_mo=500)
+        browser = p.chromium.launch(
+            headless=True if IS_CI else False,
+            slow_mo=0 if IS_CI else 500
+        )
         yield browser
         browser.close()
 
@@ -33,7 +38,7 @@ def page(browser_context):
 
 @pytest.fixture(scope="function")
 def authenticated_page(browser_instance):
-    """Khởi tạo context đã nạp sẵn cookie/token session với giao diện bật lên."""
+    """Khởi tạo context đã nạp sẵn cookie/token session."""
     if not AUTH_STATE_FILE.exists():
         pytest.fail(f"Chưa có file session: {AUTH_STATE_FILE}. Hãy chạy test_setup_auth.py trước!")
     

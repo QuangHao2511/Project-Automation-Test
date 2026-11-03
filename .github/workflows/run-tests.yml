@@ -2,13 +2,16 @@ name: Playwright Daily Automation Test CI
 
 on:
   schedule:
-    # Chạy tự động lúc 07:00 sáng hàng ngày (UTC+7 -> 00:00 UTC)
+    # Chạy tự động lúc 07:00 sáng mỗi ngày (UTC+7 -> 00:00 UTC)
     - cron: '0 0 * * *'
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   daily_regression_test:
@@ -33,14 +36,40 @@ jobs:
 
       - name: Run All Regression Test Cases
         run: |
-          # conftest.py sẽ tự động tạo auth_state trước khi chạy test
-          pytest tests/ -v
+          # Chạy test và xuất kết quả json vào reports/allure-results
+          pytest tests/ -v --alluredir=reports/allure-results
 
-      - name: Upload Daily Test Artifacts (Reports & Evidence)
+      - name: Get Allure History
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure Report HTML
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        id: allure-report
+        with:
+          allure_results: reports/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+
+      - name: Upload Test Artifacts (Evidence)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: daily-test-execution-reports-${{ github.run_id }}
-          path: |
-            reports/
+          path: reports/
           retention-days: 14

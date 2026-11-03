@@ -2,13 +2,12 @@ name: Playwright Daily Automation Test CI
 
 on:
   schedule:
+    # Chạy tự động lúc 07:00 sáng hàng ngày (UTC+7 -> 00:00 UTC)
     - cron: '0 0 * * *'
-
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-
   workflow_dispatch:
 
 jobs:
@@ -32,14 +31,10 @@ jobs:
         run: |
           playwright install --with-deps chromium
 
-      - name: Run Auth Setup (Lưu phiên đăng nhập)
-        run: |
-          pytest tests/test_setup_auth.py
-
       - name: Run All Regression Test Cases
         run: |
-          # Chạy toàn bộ các file test trong thư mục tests (trừ file setup auth)
-          pytest tests/ --ignore=tests/test_setup_auth.py -v
+          # conftest.py sẽ tự động tạo auth_state trước khi chạy test
+          pytest tests/ -v
 
       - name: Upload Daily Test Artifacts (Reports & Evidence)
         if: always()

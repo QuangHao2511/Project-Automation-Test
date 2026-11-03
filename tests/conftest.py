@@ -70,3 +70,25 @@ def pytest_runtest_makereport(item, call):
                 name=f"Failure Screenshot - {item.name}",
                 attachment_type=allure.attachment_type.PNG
             )
+            
+def pytest_sessionstart(session):
+    """Tự động chạy tạo phiên đăng nhập trước khi bắt đầu test suite."""
+    from config.settings import AUTH_STATE_FILE
+    from pages.login_page import LoginPage
+    
+    print("\n[HOOK] Đang khởi tạo phiên đăng nhập (Storage State)...")
+    with sync_playwright() as p:
+        # Chạy ngầm headless để tạo session nhanh
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context()
+        page = context.new_page()
+        
+        login_page = LoginPage(page)
+        login_page.open_url("https://www.saucedemo.com/")
+        login_page.login("standard_user", "secret_sauce")
+        page.locator(".inventory_list").wait_for(state="visible", timeout=10000)
+        
+        AUTH_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        context.storage_state(path=str(AUTH_STATE_FILE))
+        browser.close()
+    print("[HOOK] Khởi tạo Storage State thành công!\n")

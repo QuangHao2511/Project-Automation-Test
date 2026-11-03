@@ -1,13 +1,18 @@
-name: Playwright Test CI
+name: Playwright Daily Automation Test CI
 
 on:
+  schedule:
+    - cron: '0 0 * * *'
+
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
 
+  workflow_dispatch:
+
 jobs:
-  test:
+  daily_regression_test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
@@ -27,19 +32,20 @@ jobs:
         run: |
           playwright install --with-deps chromium
 
-      - name: Run Auth Setup (Generate Storage State)
+      - name: Run Auth Setup (Lưu phiên đăng nhập)
         run: |
           pytest tests/test_setup_auth.py
 
-      - name: Run Test Suite (Headless Mode)
+      - name: Run All Regression Test Cases
         run: |
-          pytest tests/test_login.py tests/test_cart.py
+          # Chạy toàn bộ các file test trong thư mục tests (trừ file setup auth)
+          pytest tests/ --ignore=tests/test_setup_auth.py -v
 
-      - name: Upload Test Artifacts (Reports & Screenshots)
+      - name: Upload Daily Test Artifacts (Reports & Evidence)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-execution-reports
+          name: daily-test-execution-reports-${{ github.run_id }}
           path: |
             reports/
           retention-days: 14

@@ -3,7 +3,7 @@ name: Playwright Daily Automation Test CI
 on:
   schedule:
     # Chạy tự động lúc 07:00 sáng mỗi ngày (UTC+7 -> 00:00 UTC)
-    - cron: '0 0 * * *'
+    - cron: '40 23 * * *'
   push:
     branches: [ main, master ]
   pull_request:

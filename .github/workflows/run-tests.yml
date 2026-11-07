@@ -43,11 +43,10 @@ jobs:
       - name: Install Playwright Browsers & OS Dependencies
         run: |
           playwright install --with-deps chromium
-
+          
       - name: Run All Regression Test Cases
         run: |
-          pytest tests/ -v --alluredir=reports/allure-results
-
+          pytest tests/ -n auto --alluredir=reports/allure-results --clean-alluredir
       - name: Generate Allure Report HTML
         if: always()
         run: |

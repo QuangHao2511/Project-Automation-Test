@@ -1,19 +1,16 @@
-# Python cache
-__pycache__/
-*.py[cod]
-*$py.class
-.pytest_cache/
-
-# Môi trường ảo
-venv/
+﻿
+# API Keys & Secrets
 .env
 
-# Báo cáo Allure & Screenshots
-reports/allure-results/
-reports/screenshots/
-reports/state/
-reports/report.html
+# Báo cáo Allure
+reports/
+.allure/
 
-# Playwright artifacts
-test-results/
-playwright-report/
+# Trạng thái đăng nhập Playwright
+auth_state.json
+
+# Python Caches
+__pycache__/
+.pytest_cache/
+*.pyc
+

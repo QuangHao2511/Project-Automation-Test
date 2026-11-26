@@ -3,22 +3,22 @@
 
 **Tài khoản test:** `standard_user` / ``
 
-**Kết quả kỳ vọng:** Báo lỗi chính xác `Epic sadface: Password is required`","1276","[TC02_NO_PASSWORD] Đăng nhập không nhập mật khẩu","tests.saucedemo","2026-11-25","passed","2026-11-25","TestLoginScenarios","test_login","",""
-"**Kịch bản đặc biệt:** Test case này sẽ thực hiện đăng nhập vào Herokuapp trong khi các test case của SauceDemo đang chạy ngầm bằng file `auth_state.json`. Nếu pass, chứng tỏ Playwright đã cách ly hoàn toàn Cookie của 2 luồng.","1054","Tương tác độc lập: Đăng nhập bằng form","tests.external_demo","2026-11-25","passed","2026-11-25","TestExternalSite","test_external","",""
+**Kết quả kỳ vọng:** Báo lỗi chính xác `Epic sadface: Password is required`","1163","[TC02_NO_PASSWORD] Đăng nhập không nhập mật khẩu","tests.saucedemo","2026-11-26","passed","2026-11-26","TestLoginScenarios","test_login","",""
+"","254","Kiểm tra chức năng sắp xếp với tùy chọn: hilo","tests.saucedemo","2026-11-26","passed","2026-11-26","TestInventoryScenarios","test_inventory","",""
+"","308","Kiểm tra chức năng sắp xếp với tùy chọn: lohi","tests.saucedemo","2026-11-26","passed","2026-11-26","TestInventoryScenarios","test_inventory","",""
 "**Mục tiêu:** Kiểm tra phản hồi của hệ thống đối với kịch bản: Đăng nhập với tài khoản bị khóa
 
 **Tài khoản test:** `locked_out_user` / `secret_sauce`
 
-**Kết quả kỳ vọng:** Báo lỗi chính xác `Epic sadface: Sorry, this user has been locked out.`","1358","[TC01_LOCKED_USER] Đăng nhập với tài khoản bị khóa","tests.saucedemo","2026-11-25","passed","2026-11-25","TestLoginScenarios","test_login","",""
+**Kết quả kỳ vọng:** Báo lỗi chính xác `Epic sadface: Sorry, this user has been locked out.`","1235","[TC01_LOCKED_USER] Đăng nhập với tài khoản bị khóa","tests.saucedemo","2026-11-26","passed","2026-11-26","TestLoginScenarios","test_login","",""
 "**Mục tiêu:** Kiểm tra phản hồi của hệ thống đối với kịch bản: Nhập sai mật khẩu của tài khoản
 
 **Tài khoản test:** `standard_user` / `invalid_password_123`
 
-**Kết quả kỳ vọng:** Báo lỗi chính xác `Epic sadface: Username and password do not match any user in this service`","1318","[TC03_WRONG_PASSWORD] Nhập sai mật khẩu của tài khoản","tests.saucedemo","2026-11-25","passed","2026-11-25","TestLoginScenarios","test_login","",""
-"**Mục tiêu:** Chứng minh Framework có thể mở các Context hoàn toàn mới, không bị ảnh hưởng bởi file `auth_state.json` của SauceDemo khi chạy song song.","959","Tương tác độc lập: Thêm/Xóa phần tử động","tests.external_demo","2026-11-25","passed","2026-11-25","TestExternalSite","test_external","",""
-"","936","Tương tác độc lập: Bật/Tắt Checkbox","tests.external_demo","2026-11-25","passed","2026-11-25","TestExternalSite","test_external","",""
-"","387","Kiểm tra chức năng sắp xếp với tùy chọn: lohi","tests.saucedemo","2026-11-25","passed","2026-11-25","TestInventoryScenarios","test_inventory","",""
-"","444","Kiểm tra chức năng sắp xếp với tùy chọn: za","tests.saucedemo","2026-11-25","passed","2026-11-25","TestInventoryScenarios","test_inventory","",""
-"","336","Kiểm tra chức năng sắp xếp với tùy chọn: az","tests.saucedemo","2026-11-25","passed","2026-11-25","TestInventoryScenarios","test_inventory","",""
-"","1015","Thêm sản phẩm vào giỏ hàng thành công (Không cần Login lại)","tests.saucedemo","2026-11-25","passed","2026-11-25","TestCartScenarios","test_cart","",""
-"","335","Kiểm tra chức năng sắp xếp với tùy chọn: hilo","tests.saucedemo","2026-11-25","passed","2026-11-25","TestInventoryScenarios","test_inventory","",""
+**Kết quả kỳ vọng:** Báo lỗi chính xác `Epic sadface: Username and password do not match any user in this service`","1202","[TC03_WRONG_PASSWORD] Nhập sai mật khẩu của tài khoản","tests.saucedemo","2026-11-26","passed","2026-11-26","TestLoginScenarios","test_login","",""
+"","900","Thêm sản phẩm vào giỏ hàng thành công (Không cần Login lại)","tests.saucedemo","2026-11-26","passed","2026-11-26","TestCartScenarios","test_cart","",""
+"","1032","Tương tác độc lập: Bật/Tắt Checkbox","tests.external_demo","2026-11-26","passed","2026-11-26","TestExternalSite","test_external","",""
+"**Kịch bản đặc biệt:** Test case này sẽ thực hiện đăng nhập vào Herokuapp trong khi các test case của SauceDemo đang chạy ngầm bằng file `auth_state.json`. Nếu pass, chứng tỏ Playwright đã cách ly hoàn toàn Cookie của 2 luồng.","1418","Tương tác độc lập: Đăng nhập bằng form","tests.external_demo","2026-11-26","passed","2026-11-26","TestExternalSite","test_external","",""
+"","225","Kiểm tra chức năng sắp xếp với tùy chọn: az","tests.saucedemo","2026-11-26","passed","2026-11-26","TestInventoryScenarios","test_inventory","",""
+"**Mục tiêu:** Chứng minh Framework có thể mở các Context hoàn toàn mới, không bị ảnh hưởng bởi file `auth_state.json` của SauceDemo khi chạy song song.","1182","Tương tác độc lập: Thêm/Xóa phần tử động","tests.external_demo","2026-11-26","passed","2026-11-26","TestExternalSite","test_external","",""
+"","267","Kiểm tra chức năng sắp xếp với tùy chọn: za","tests.saucedemo","2026-11-26","passed","2026-11-26","TestInventoryScenarios","test_inventory","",""
